@@ -37,3 +37,9 @@ clean-build:
 	rm -rf dist/
 	rm -rf *.egg-info/
 	rm -rf pip-wheel-metadata/
+
+build-container:
+	docker build -t {{cookiecutter.package_name}} .
+
+test-container:
+	docker run -v $(PWD)/tests:/work/tests app python -m pytest

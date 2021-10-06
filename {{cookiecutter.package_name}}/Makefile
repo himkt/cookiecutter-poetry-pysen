@@ -42,4 +42,4 @@ build-container:
 	docker build -t {{cookiecutter.package_name}} .
 
 test-container:
-	docker run -v $(PWD)/tests:/work/tests app python -m pytest
+	docker run -v $(PWD)/tests:/work/tests {{cookiecutter.package_name}} python -m pytest

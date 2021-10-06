@@ -18,6 +18,7 @@ WORKDIR /work
 
 COPY --from=builder /work/requirements.txt ./requirements.txt
 COPY --from=builder /work/{{cookiecutter.package_name}} ./{{cookiecutter.package_name}}
+COPY pyproject.toml ./
 
 RUN pip3 install -r requirements.txt
 RUN pip3 install .

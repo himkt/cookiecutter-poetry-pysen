@@ -7,15 +7,14 @@ WORKDIR /work
 
 COPY pyproject.toml                ./
 COPY poetry.lock                   ./
-COPY poetry.toml                   ./
 COPY {{cookiecutter.package_name}} ./{{cookiecutter.package_name}} 
 
-RUN poetry install --no-dev
+RUN poetry export -f requirements.txt -o requirements.txt
 
 
 FROM python:3.8.12-slim-buster as runner
 
 WORKDIR /work
 
-COPY --from=builder /work/.venv ./.venv
+COPY --from=builder /work/requirements.txt ./requirements.txt
 COPY --from=builder /work/{{cookiecutter.package_name}} ./{{cookiecutter.package_name}} 
